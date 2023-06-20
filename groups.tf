@@ -85,6 +85,7 @@ resource "google_project_iam_member" "project_service_storage_admin_roles" {
 }
 
 
+
 /*
 # associate the security group to the gcp organization
 resource "google_organization_iam_member" "organization" {
