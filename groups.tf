@@ -17,23 +17,26 @@ resource "google_cloud_identity_group" "cloud_identity_group_basic" {
   }
 }
 
-/*
-resource "google_cloud_identity_group_membership" "cloud_identity_group_membership_basic" {
-  group    = google_cloud_identity_group.cloud_identity_group_basic.id
+# group for security viewer
+resource "google_cloud_identity_group" "cloud_identity_security_viewer_group" {
+  display_name         = "security viewers group"
+  description          = "security viewers group - read only"
+  initial_group_config = "WITH_INITIAL_OWNER"
 
-  preferred_member_key {
-    id = "tariq@globalmatchpassport.com"
+# value from Account >> Account Settings
+# https://admin.google.com/u/1/ac/accountsettings/profile?hl=en
+
+  parent = "customers/C00n10ucq"
+
+  group_key {
+      id = "security-viewers@globalmatchpassport.com"
   }
 
-  roles {
-    name = "MEMBER"
+  labels = {
+    "cloudidentity.googleapis.com/groups.discussion_forum" = ""
   }
-
-  #roles {
-  #  name = "MANAGER"
-  #}
 }
-*/
+
 
 resource "google_cloud_identity_group_membership" "cloud_identity_group_membership_basic" {
 
@@ -58,27 +61,41 @@ resource "google_cloud_identity_group_membership" "cloud_identity_group_membersh
   #}
 }
 
-/*
 
-resource "google_project_iam_custom_role" "my-custom-role" {
-  role_id     = "myCustomRole"
-  title       = "My Custom Role"
-  description = "A description"
-  permissions = ["iam.roles.list", "iam.roles.create", "iam.roles.delete"]
-}
-*/
-
-# add roles to group for project
+# add roles to group for the seed project
 
 resource "google_project_iam_member" "project_service_identity_roles" {
  
-    for_each = toset([
-    "roles/owner",
-    "roles/storage.admin"
-  ])
 
   project = var.project_id
-  role    = each.value
+  role    = "roles/editor"
   member  = "group:devops@globalmatchpassport.com"
 }
 
+
+resource "google_project_iam_member" "project_service_storage_admin_roles" {
+ 
+ depends_on = [
+    google_cloud_identity_group.cloud_identity_group_basic
+  ]
+
+  project = var.project_id
+  role    = "roles/storage.admin"
+  member  = "group:devops@globalmatchpassport.com"
+}
+
+
+/*
+# associate the security group to the gcp organization
+resource "google_organization_iam_member" "organization" {
+
+   depends_on = [
+    google_cloud_identity_group.cloud_identity_group_basic
+  ]
+
+
+  org_id  = "920033224664"
+  role    = "roles/viewer"
+  member  = "group:security-viewers@globalmatchpassport.com"
+}
+*/
