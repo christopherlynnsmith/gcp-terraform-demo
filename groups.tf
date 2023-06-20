@@ -19,17 +19,18 @@ resource "google_cloud_identity_group" "cloud_identity_group_basic" {
 
 # group for security viewer
 resource "google_cloud_identity_group" "cloud_identity_security_viewer_group" {
-  display_name         = "security viewers group"
-  description          = "security viewers group - read only"
-  initial_group_config = "WITH_INITIAL_OWNER"
+  display_name         = var.security_display_name
+  description          = var.security_description
+  initial_group_config = var.devops_initial_group_config
+
 
 # value from Account >> Account Settings
 # https://admin.google.com/u/1/ac/accountsettings/profile?hl=en
 
-  parent = "customers/C00n10ucq"
+  parent = var.cloud_identity_org_parent
 
   group_key {
-      id = "security-viewers@globalmatchpassport.com"
+      id = var.security_group_principal
   }
 
   labels = {
@@ -40,10 +41,7 @@ resource "google_cloud_identity_group" "cloud_identity_security_viewer_group" {
 
 resource "google_cloud_identity_group_membership" "cloud_identity_group_membership_basic" {
 
-    for_each = toset([
-    "tariq@globalmatchpassport.com", 
-    "jarrett@globalmatchpassport.com"
-  ])
+    for_each = toset( var.devops_engineer_users)
 
 
   group    = google_cloud_identity_group.cloud_identity_group_basic.id

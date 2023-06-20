@@ -36,3 +36,30 @@ variable "devops_principal" {
   default     = "devops@globalmatchpassport.com"
 }
 
+# security groups
+
+# groups configuration variables
+variable "security_display_name" {
+  description = "group display name"
+  type        = string
+  default     = ""
+}
+
+variable "security_description" {
+  description = "group description"
+  type        = string
+  default     = ""
+}
+
+variable "security_group_principal" {
+  description = "group description"
+  type        = string
+  default     = "security-viewers@globalmatchpassport.com"
+}
+
+
+variable "devops_engineer_users" {
+    type    = list(string)
+    default = ["tariq@globalmatchpassport.com", "jarrett@globalmatchpassport.com"]
+    description = "list of engineers"
+}
