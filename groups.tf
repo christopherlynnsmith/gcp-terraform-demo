@@ -1,15 +1,15 @@
 resource "google_cloud_identity_group" "cloud_identity_group_basic" {
-  display_name         = "devOps group"
-  description          = "devOps group working on cloud platform"
-  initial_group_config = "WITH_INITIAL_OWNER"
+  display_name         = var.devops_display_name
+  description          = var. devops_description
+  initial_group_config = var.devops_initial_group_config
 
 # value from Account >> Account Settings
 # https://admin.google.com/u/1/ac/accountsettings/profile?hl=en
 
-  parent = "customers/C00n10ucq"
+  parent =  var.cloud_identity_org_parent
 
   group_key {
-      id = "devops@globalmatchpassport.com"
+      id = var.devops_principal
   }
 
   labels = {
