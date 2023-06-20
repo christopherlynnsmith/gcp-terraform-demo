@@ -35,3 +35,7 @@ terraform.rc
 
 #ignore creds file
 *.json
+
+
+.terraform.lock.hcl
+*.txt
