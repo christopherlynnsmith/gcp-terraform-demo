@@ -15,12 +15,15 @@ devops_principal = "devops@globalmatchpassport.com"
 # groups configuration variables
 security_display_name = "security group display name"
 
-security_description = "group for security"
+
 
 security_group_principal = "security-viewers@globalmatchpassport.com"
 
 # devops
 devops_engineer_users= ["tariq@globalmatchpassport.com", "jarrett@globalmatchpassport.com"]
 
+
+#security_description = "group for security"
+
 # architects
-architect_users= ["tariq@globalmatchpassport.com", "jarrett@globalmatchpassport.com"]
+#architect_users= ["tariq@globalmatchpassport.com", "jarrett@globalmatchpassport.com"]

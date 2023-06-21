@@ -78,38 +78,38 @@ variable "groupsMetaData" {
 
         developers = {
           display_name  = "developers"
-          description   = "testdescription"
+          description   = "developers identity group"
           principal = "developers@globalmatchpassport.com"
 
         },
 
         engineers = {
           display_name  = "engineers"
-          description   = "testdescription"
+          description   = "devOps engineering identity group"
           principal = "engineers@globalmatchpassport.com"
 
         },
         data-scientists = {
           display_name  = "data-scientists"
-          description   = "testdescription"
+          description   = "data-scientists engineering identity group"
           principal = "data-scientists@globalmatchpassport.com"
 
         },
         pipeline-admins = {
           display_name  = "pipeline-admins"
-          description   = "testdescription"
+          description   = "pipeline-admins engineering identity group"
           principal = "pipeline-admins@globalmatchpassport.com"
 
         },
         network-operations = {
           display_name  = "network-operations"
-          description   = "testdescription"
+          description   = "network-operations engineering identity group"
           principal = "network-operations@globalmatchpassport.com"
 
         },        
         info-security = {
           display_name  = "info-security"
-          description   = "testdescription"
+          description   = "info-security engineering identity group"
           principal = "info-security@globalmatchpassport.com"
 
         }
