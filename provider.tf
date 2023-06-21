@@ -4,3 +4,4 @@ provider "google-beta" {
   billing_project       = "seed-390122"
   credentials = "seed-390122-839a39c28a06.json"
 }
+
